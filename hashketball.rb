@@ -127,3 +127,94 @@ def game_hash
 end
 
 # Write code here
+
+def num_points_scored(player_name)
+  game_lib = game_hash
+  player_points = nil
+  game_lib[:home][:players].each do |name|
+    if name[:player_name] == player_name
+      player_points = name[:points]
+    end
+  end
+  game_lib[:away][:players].each do |name|
+    if name[:player_name] == player_name
+      player_points = name[:points]
+    end
+  end
+  player_points
+end
+
+def shoe_size(player_name)
+  game_lib = game_hash
+  player_shoe_size = nil
+  game_lib[:home][:players].each do |name|
+    if name[:player_name] == player_name
+      player_shoe_size = name[:shoe]
+    end
+  end
+  game_lib[:away][:players].each do |name|
+    if name[:player_name] == player_name
+      player_shoe_size = name[:shoe]
+    end
+  end
+  player_shoe_size
+end
+
+def team_colors(team_name)
+  game_lib = game_hash
+  if game_lib[:home][:team_name] == team_name
+    game_lib[:home][:colors]
+  else
+    game_lib[:away][:colors]
+  end
+end
+
+def team_names
+  game_lib = game_hash
+  [game_lib[:home][:team_name], game_lib[:away][:team_name]]
+end
+
+def player_numbers(team_name)
+  game_lib = game_hash
+  if game_lib[:home][:team_name] == team_name
+    game_lib[:home][:players].map{|player| player[:number]}
+  else
+    game_lib[:away][:players].map{|player| player[:number]}
+  end
+end
+
+def player_stats(player_name)
+  game_lib = game_hash
+  player_stats = nil
+  game_lib[:home][:players].each do |name|
+    if name[:player_name] == player_name
+      player_stats = name
+    end
+  end
+  game_lib[:away][:players].each do |name|
+    if name[:player_name] == player_name
+      player_stats = name
+    end
+  end
+  player_stats
+end
+
+def big_shoe_rebounds
+  game_lib = game_hash
+  shoe_tracker = 0
+  rebounds = nil
+  game_lib[:home][:players].each do |name|
+    if name[:shoe] > shoe_tracker
+      shoe_tracker = name[:shoe]
+      rebounds = name[:rebounds]
+    end
+  end
+  game_lib[:away][:players].each do |name|
+    if name[:shoe] > shoe_tracker
+      shoe_tracker = name[:shoe]
+      rebounds = name[:rebounds]
+    end
+  end
+  p rebounds
+end
+

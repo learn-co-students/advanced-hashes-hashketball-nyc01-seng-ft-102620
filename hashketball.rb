@@ -129,20 +129,20 @@ def game_hash
 end
 
 # Write code here
-def num_points_scored(player_score)
+def num_points_scored(player_search)
   game_hash.each do |team, team_info|
     team_info[:players].each do |player|
-      if player[:player_name] == player_score
+      if player[:player_name] == player_search
         return player[:points]
       end
     end
   end
 end
 
-def shoe_size(player_size)
+def shoe_size(name)
   game_hash.each do |team, team_info|
     team_info[:players].each do |player|
-      if player[:player_name] == player_size
+      if player[:player_name] == name
         return player[:shoe]
       end
     end
@@ -183,8 +183,8 @@ def player_stats(input)
     team_info.each do |key, value|
       if key == :players
         value.each do |player|
-          if input == player[:player_n]
-            player.delete(:player_n) # having player name inside the hash was a bad idea!
+          if input == player[:player_name]
+             # having player name inside the hash was a bad idea!
             return player
           end
         end
@@ -192,7 +192,6 @@ def player_stats(input)
     end
   end
 end
-
 
 def big_shoe_rebounds
   big_shoe = 0

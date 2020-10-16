@@ -1,4 +1,5 @@
-# Write your code below game_hash
+require 'pry'
+
 def game_hash
   {
     home: {
@@ -126,4 +127,108 @@ def game_hash
   }
 end
 
-# Write code here
+def num_points_scored(player_name)
+  hashketball = game_hash 
+ 
+  
+  hashketball.each do |key,value|
+    value[:players].each do |player, details|
+      if player.has_value?(player_name)
+        return player[:points]
+      end
+      #binding.pry
+    end
+  end
+end 
+
+def team_colors(input_name)
+  hashketball = game_hash 
+  
+hashketball.each do |key, value|
+  if value.has_value?(input_name)
+    #binding.pry
+    return value[:colors]
+  #binding.pry
+end
+end
+end 
+
+def team_names
+    hashketball = game_hash 
+    name_array = []
+
+hashketball.each do |key, value|
+  if value.has_value?("Brooklyn Nets") || value.has_value?("Charlotte Hornets")
+    name_array << value[:team_name]
+ #binding.pry
+    end
+  end 
+  #binding.pry
+name_array
+end 
+
+def player_numbers(team)
+      hashketball = game_hash 
+      player_numbers = []
+i = 0
+
+hashketball.each do |key, value|
+    if value.has_value?(team)
+      while i < value[:players].length do
+     player_numbers << value[:players][i][:number]
+     i += 1
+    #binding.pry
+      end
+    end 
+  end
+  player_numbers
+  #binding.pry
+  end
+  
+def shoe_size(player_name)
+  hashketball = game_hash 
+  
+  hashketball.each do |key, value|
+    value[:players].each do |stats, data|
+      if stats[:player_name] == player_name
+        return stats[:shoe]
+      end
+    #binding.pry
+    end 
+  end
+end 
+
+def player_stats(given_player)
+  hashketball = game_hash 
+  
+  hashketball.each do |key, value|
+   value[:players].each do |stats, data|
+    if stats.has_value?(given_player)
+      return stats
+      end
+     #binding.pry
+    end 
+  end
+ end
+
+def big_shoe_rebounds
+    hashketball = game_hash 
+  
+  shoe_size = 0
+  winner_rebounds = 0
+
+hashketball.each do |key, value|
+   value[:players].each do |stats, data|
+     if stats[:shoe] > shoe_size
+       shoe_size = stats[:shoe]
+       winner_rebounds = stats[:rebounds]
+    #winner_hash = value[:players].max_by { |x| :shoe}
+     #winner_hash[:rebounds]
+      end 
+     #binding.pry
+    end 
+   end 
+ winner_rebounds
+ #binding.pry
+ end 
+

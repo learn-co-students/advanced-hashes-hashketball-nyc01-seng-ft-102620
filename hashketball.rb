@@ -1,3 +1,4 @@
+require 'pry'
 # Write your code below game_hash
 def game_hash
   {
@@ -125,5 +126,67 @@ def game_hash
     }
   }
 end
+# binding.pry
 
-# Write code here
+
+def get_players
+  teams = game_hash.map { |location,team_data| team_data[:players]}
+  # binding.pry
+  return teams[0] + teams[1]
+end 
+
+  
+def num_points_scored(player_name)
+  get_players.map do |player|
+    if player[:player_name] == player_name
+       return player[:points]
+    end
+  end 
+end 
+
+def shoe_size(player_name)
+  get_players.map do |player|
+    if player[:player_name] == player_name
+      return player[:shoe]
+    end 
+  end 
+end 
+ 
+
+def team_colors(team_names)
+  game_hash.map do |location, team_data|
+    if team_data[:team_name] == team_names
+      return team_data[:colors]
+    end 
+  end 
+end
+
+def team_names
+ team_names = game_hash[:home][:team_name],game_hash[:away][:team_name]
+end 
+    
+
+def player_numbers(team_name)
+  if game_hash[:home][:team_name] == team_name
+    return game_hash[:home][:players].map { |player| player[:number] }
+  else 
+    return game_hash[:away][:players].map { |player| player[:number] }
+  end 
+end 
+  
+def player_stats(players_name)
+  get_players.map do |player| 
+    # binding.pry
+    if player[:player_name] == players_name
+      return player
+    end 
+  end 
+end
+
+
+def big_shoe_rebounds 
+  get_players.max_by { |player| player[:shoe] } [:rebounds]
+end
+    
+
+

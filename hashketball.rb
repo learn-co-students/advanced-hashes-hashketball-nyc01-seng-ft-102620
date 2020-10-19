@@ -126,4 +126,120 @@ def game_hash
   }
 end
 
-# Write code here
+def team_finder(name)
+  data = game_hash
+  home_team = false
+  for i in 0...data[:home][:players].size do
+    if data[:home][:players][i][:player_name] == name
+      home_team = true
+    end
+  end
+  home_team
+end
+
+def num_points_scored(name)
+  data = game_hash
+  home_boolean = team_finder(name)
+  if home_boolean
+    for i in 0...data[:home][:players].size do
+      if data[:home][:players][i][:player_name] == name
+        points_scored = data[:home][:players][i][:points]
+      end
+    end
+  else
+    for i in 0...data[:away][:players].size do
+      if data[:away][:players][i][:player_name] == name
+        points_scored = data[:away][:players][i][:points]
+      end
+    end    
+  end
+  points_scored
+end
+
+def shoe_size(name)
+  data = game_hash
+  home_boolean = team_finder(name)
+  if home_boolean
+    for i in 0...data[:home][:players].size do
+      if data[:home][:players][i][:player_name] == name
+        shoe_size_var = data[:home][:players][i][:shoe]
+      end
+    end
+  else
+    for i in 0...data[:away][:players].size do
+      if data[:away][:players][i][:player_name] == name
+        shoe_size_var = data[:away][:players][i][:shoe]
+      end
+    end    
+  end
+  shoe_size_var
+end
+
+def team_colors(name)
+  data = game_hash
+  if data[:home][:team_name] == name
+    teamcolors = data[:home][:colors]
+  else
+    teamcolors = data[:away][:colors]
+  end
+  teamcolors
+end
+
+def team_names
+  data = game_hash
+  names = []
+  names.push(data[:home][:team_names])
+  names.push(data[:away][:team_names])
+  names
+end
+
+def player_numbers(teamName)
+  data = game_hash
+  numbers = []
+  if data[:home][:team_name] == teamName
+    for i in 0...data[:home][:players].size do 
+      numbers.push(data[:home][:players][i][:number])
+    end
+  else
+    for i in 0...data[:away][:players].size do 
+      numbers.push(data[:away][:players][i][:number]) 
+    end
+  end
+  numbers
+end
+
+def player_stats(name)
+  data = game_hash
+  home_boolean = team_finder(name)
+  if home_boolean
+    for i in 0...data[:home][:players].size do
+      if data[:home][:players][i][:player_name] == name
+        stats = data[:home][:players][i]
+      end
+    end
+  else
+    for i in 0...data[:away][:players].size do
+      if data[:away][:players][i][:player_name] == name
+        stats = data[:away][:players][i]
+      end
+    end    
+  end
+  stats
+end
+
+def big_shoe_rebounds
+  data = game_hash
+  max_size = 0 
+  rebs = 0
+  data.each do |team,value| 
+    for i in 0...data[team][:players].size do
+      if data[team][:players][i][:shoe] > max_size
+        max_size = data[team][:players][i][:shoe]
+        rebs = data[team][:players][i][:rebounds]
+      end
+    end
+  end
+  rebs
+end
+
+  

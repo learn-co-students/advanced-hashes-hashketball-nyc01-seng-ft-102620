@@ -1,10 +1,12 @@
-# Write your code below game_hash
+require 'pry'# Write your code below game_hash
 def game_hash
   {
-    home: {
+    home:
+    {
       team_name: "Brooklyn Nets",
       colors: ["Black", "White"],
-      players: [
+      players:
+      [
         {
           player_name: "Alan Anderson",
           number: 0,
@@ -125,5 +127,90 @@ def game_hash
     }
   }
 end
+
+
+def num_points_scored (player)
+  game_hash.each do |k, v|
+    v[:players].each do |hash|
+      if hash.value?(player)
+        return hash[:points]
+      end
+    end
+  end
+end
+
+def shoe_size (player)
+  game_hash.each do |k, v|
+    v[:players].each do |hash|
+      if hash.value?(player)
+        return hash[:shoe]
+      end
+    end
+  end
+end
+
+def team_colors (team)
+  if game_hash[:home].value?(team)
+    return game_hash[:home][:colors]
+  end
+  if game_hash[:away].value?(team)
+    return game_hash[:away][:colors]
+  end
+end
+
+def team_names
+  result = []
+  result.push(game_hash[:home][:team_name], game_hash[:away][:team_name])
+  result
+end
+
+def player_numbers (team)
+  points = []
+  game_hash.each do |k, v|
+    if v.value?(team)
+      v[:players].each do |hash|
+        if hash.key?(:number)
+          points << hash[:number]
+        end
+      end
+    end
+  end
+  return points
+end
+
+def player_stats (player)
+  game_hash.each do |k, v|
+    v[:players].each do |hash|
+      if hash.value?(player)
+        return hash
+      end
+    end
+  end
+end
+
+def big_shoe_rebounds
+shoe_size = game_hash[:home][:players][0][:shoe]
+
+  game_hash.each do |k, v|
+    v[:players].each do |hash|
+      if hash[:shoe] > shoe_size
+        shoe_size = hash[:shoe]
+      end
+    end
+  end
+
+  game_hash.each do |k, v|
+    v[:players].each do |hash|
+      if hash[:shoe] == shoe_size
+        return hash[:rebounds]
+      end
+    end
+  end
+end
+
+
+
+
+
 
 # Write code here

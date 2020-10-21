@@ -1,4 +1,6 @@
 # Write your code below game_hash
+require 'pry'
+
 def game_hash
   {
     home: {
@@ -127,3 +129,89 @@ def game_hash
 end
 
 # Write code here
+
+def num_points_scored(player)
+  count = 0 
+  player_points = 0
+  while count < game_hash[:home][:players].count
+    if game_hash[:home][:players][count][:player_name] == player
+      player_points = game_hash[:home][:players][count][:points]
+    elsif game_hash[:away][:players][count][:player_name] == player
+      player_points = game_hash[:away][:players][count][:points]
+    end
+    count += 1
+  end 
+  player_points
+end
+
+def shoe_size(player)
+  count = 0 
+  player_shoe = 0
+  while count < game_hash[:home][:players].count
+    if game_hash[:home][:players][count][:player_name] == player
+      player_shoe = game_hash[:home][:players][count][:shoe]
+    elsif game_hash[:away][:players][count][:player_name] == player
+      player_shoe = game_hash[:away][:players][count][:shoe]
+    end
+    count += 1
+  end 
+  player_shoe
+end 
+
+def team_colors(team)
+  game_hash.each do |side, details|
+    if details[:team_name] == team 
+      return game_hash.dig(side, :colors)
+    end 
+  end   
+end   
+
+def team_names
+  team_list = []
+  game_hash.each do |side, details|
+    team_list << game_hash[side][:team_name]
+  end
+  team_list
+end   
+  
+def player_numbers(team)
+  jersey_list = []
+  count = 0
+  game_hash.each do |side, details|
+    if details[:team_name] == team 
+      while count < game_hash[side][:players].count
+        jersey_list << game_hash[side][:players][count][:number]
+        count += 1
+      end   
+    end 
+  end 
+  jersey_list
+end 
+
+def player_stats(player)
+  count = 0 
+  while count < game_hash[:home][:players].count
+    if game_hash[:home][:players][count][:player_name] == player
+      return game_hash[:home][:players][count]
+    elsif game_hash[:away][:players][count][:player_name] == player
+      return game_hash[:away][:players][count]
+    end
+    count += 1
+  end
+end   
+  
+def big_shoe_rebounds
+  biggest_foot = 0
+  biggest_rebounds = 0
+  count = 0 
+  game_hash.each do |side, details|
+    while count < game_hash[side][:players].count
+      if game_hash[side][:players][count][:shoe] > biggest_foot
+        biggest_foot = game_hash[side][:players][count][:shoe]
+        biggest_rebounds = game_hash[side][:players][count][:rebounds]
+      end 
+      count += 1
+    end
+  end 
+  biggest_rebounds
+end 

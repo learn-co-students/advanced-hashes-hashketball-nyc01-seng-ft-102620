@@ -162,10 +162,35 @@ def team_names
  end
 
 def player_numbers(team_name)
-all_player = get_all_players()
-y = all_player.select do |x|
-  x[:team_name] == team_name
-  binding.pry
+new_arry =[]
+game_hash.each do |key,value |
+ if value[:team_name] == team_name
+   value[:players].each do |player|
+    new_arry  << player[:number]
+   end
+  end
+end 
+new_arry
 end
-return y[0][:number]
+
+def player_stats(player_name)
+  all_player = get_all_players()
+  h = {}
+  all_player.each do | x|
+   if player_name == x[:player_name]
+     h = x 
+ 
+  end
+ end
+h
+end
+#hashketball big_shoe_rebounds returns the number of rebounds of the player with the biggest shoe size
+
+def big_shoe_rebounds
+  all_player = get_all_players
+all_player.each do | x|
+   x[:shoe_size] = big_shoe
+   if big_shoe > 
+  binding.pry
+ end
 end

@@ -187,10 +187,19 @@ end
 #hashketball big_shoe_rebounds returns the number of rebounds of the player with the biggest shoe size
 
 def big_shoe_rebounds
-  all_player = get_all_players
-all_player.each do | x|
-   x[:shoe_size] = big_shoe
-   if big_shoe > 
-  binding.pry
- end
+biggest_shoe = 0 
+rebounds = 0 
+  game_hash.collect do |location, team_data|
+    team_data[:players].collect do |key, value|
+      if key[:shoe] > biggest_shoe
+        binding.pry
+       biggest_shoe = key[:shoe]
+       rebounds = key[:rebounds]
+      end
+    end
+  end
+  rebounds
 end
+
+ 
+

@@ -192,12 +192,11 @@ rebounds = 0
   game_hash.collect do |location, team_data|
     team_data[:players].collect do |key, value|
       if key[:shoe] > biggest_shoe
-        binding.pry
        biggest_shoe = key[:shoe]
        rebounds = key[:rebounds]
+        end
       end
     end
-  end
   rebounds
 end
 

@@ -1,4 +1,5 @@
 # Write your code below game_hash
+require 'pry'
 def game_hash
   {
     home: {
@@ -127,3 +128,108 @@ def game_hash
 end
 
 # Write code here
+def num_points_scored (name)
+  counter = 0 
+  while(counter < game_hash[:away][:players].size) do 
+    if(game_hash[:away][:players][counter][:player_name] == name)
+      return game_hash[:away][:players][counter][:points]
+    end 
+    counter+=1
+  end 
+  counter = 0 
+  while(counter < game_hash[:home][:players].size) do 
+    if(game_hash[:home][:players][counter][:player_name] == name)
+      return game_hash[:home][:players][counter][:points]
+    end 
+    counter+=1
+  end 
+end
+
+def shoe_size (name)
+  counter = 0 
+  while(counter < game_hash[:away][:players].size) do 
+    if(game_hash[:away][:players][counter][:player_name] == name)
+      return game_hash[:away][:players][counter][:shoe]
+    end 
+    counter+=1
+  end 
+  counter = 0 
+  while(counter < game_hash[:home][:players].size) do 
+    if(game_hash[:home][:players][counter][:player_name] == name)
+      return game_hash[:home][:players][counter][:shoe]
+    end 
+    counter+=1
+  end 
+end 
+
+def team_colors (name)
+  if(name == "Brooklyn Nets")
+    return game_hash[:home][:colors]
+  else 
+    return game_hash[:away][:colors]
+  end 
+end 
+
+def team_names
+  teams = []
+  teams<<(game_hash[:home][:team_name])
+  teams<<(game_hash[:away][:team_name])
+  return teams
+end 
+
+def player_numbers(name)
+  numbers = []
+  if(name == "Brooklyn Nets")
+    counter = 0 
+    while(counter < game_hash[:home][:players].size) do 
+      numbers<<(game_hash[:home][:players][counter][:number])
+      counter+=1
+    end 
+  else
+    counter = 0 
+    while(counter < game_hash[:away][:players].size) do 
+      numbers<<(game_hash[:away][:players][counter][:number])
+      counter+=1
+    end 
+  end 
+  return numbers
+end 
+
+def player_stats(name)
+  counter = 0 
+  while(counter < game_hash[:away][:players].size) do 
+    if(game_hash[:away][:players][counter][:player_name] == name)
+      return game_hash[:away][:players][counter]
+    end 
+    counter+=1
+  end 
+  counter = 0 
+  while(counter < game_hash[:home][:players].size) do 
+    if(game_hash[:home][:players][counter][:player_name] == name)
+      return game_hash[:home][:players][counter]
+    end 
+    counter+=1
+  end 
+end 
+
+def big_shoe_rebounds
+  counter = 0 
+  max = game_hash[:away][:players][0][:shoe]
+  retVal = game_hash[:away][:players][0][:rebounds]
+  while(counter < game_hash[:away][:players].size) do 
+    if(game_hash[:away][:players][counter][:shoe] > max)
+      max = game_hash[:away][:players][counter][:shoe]
+      retVal = game_hash[:away][:players][counter][:rebounds]
+    end 
+    counter+=1
+  end 
+  counter = 0 
+  while(counter < game_hash[:home][:players].size) do 
+    if(game_hash[:home][:players][counter][:shoe] > max)
+      max = game_hash[:home][:players][counter][:shoe]
+      retVal = game_hash[:home][:players][counter][:rebounds]
+    end 
+    counter+=1
+  end 
+  return retVal
+end 

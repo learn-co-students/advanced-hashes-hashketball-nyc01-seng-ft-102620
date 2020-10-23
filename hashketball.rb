@@ -1,9 +1,9 @@
-# Write your code below game_hash
-def game_hash
+require "pry"
+def game_hash 
   {
-    home: {
-      team_name: "Brooklyn Nets",
-      colors: ["Black", "White"],
+    home: { #top key
+      team_name: "Brooklyn Nets",  # team level key/value
+      colors: ["Black", "White"],  #array as value
       players: [
         {
           player_name: "Alan Anderson",
@@ -125,5 +125,47 @@ def game_hash
     }
   }
 end
+def get_all_players
+  game_hash = game_hash()
+  home_players = game_hash[:home][:players]
+  away_players = game_hash[:away][:players]
+  return home_players.concat away_players
+end
 
-# Write code here
+def num_points_scored(player_name)
+  all_player = get_all_players()
+  y = all_player.select do |x|
+    x[:player_name] == player_name
+  end
+  return y[0][:points] 
+end
+
+def shoe_size(player_name)
+all_player = get_all_players()
+y = all_player.select do |x|
+  x[:player_name] == player_name
+end
+return y[0][:shoe]
+end
+
+def team_colors(team_name)
+  case team_name
+  when game_hash[:home][:team_name]
+    game_hash[:home][:colors]
+  when game_hash[:away][:team_name]
+    game_hash[:away][:colors]
+end
+end
+
+def team_names
+ [game_hash[:home][:team_name], game_hash[:away][:team_name]]
+ end
+
+def player_numbers(team_name)
+all_player = get_all_players()
+y = all_player.select do |x|
+  x[:team_name] == team_name
+  binding.pry
+end
+return y[0][:number]
+end
